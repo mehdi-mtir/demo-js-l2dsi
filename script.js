@@ -30,5 +30,36 @@ const showBooks = ()=>{
 
 }
 
-window.addEventListener('load', showBooks);
+const showAddForm = ()=>{
+  document.getElementById('formAjout').classList.remove('hide');
+}
+
+const addBook = (e)=>{
+  //Annuler le comportement par défaut (actualisation de la page)
+  e.preventDefault();
+
+  //Création d'un nouvel objet Book à partir des valeurs saisies dans le formulaire
+  const newBook = {
+    id: books[books.length-1].id + 1,
+    titre : document.getElementById('titre').value,
+    auteur : document.getElementById('auteur').value,
+    prix : document.getElementById('prix').value
+  }
+
+  //Ajout du nouveau Book dans le tableau books
+  books.push(newBook);
+
+  //Rafraichir l'affichage du tableau HTML
+  showBooks();
+
+}
+
+const init = ()=>{
+  showBooks();
+  document.getElementById('btnAjout')
+    .addEventListener('click', showAddForm);
+  document.getElementById('addForm').addEventListener('submit', addBook);
+}
+
+window.addEventListener('load', init);
 //showBooks : callback function ==> Programation asynchrone
